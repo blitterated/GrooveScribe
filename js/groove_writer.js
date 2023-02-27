@@ -2953,16 +2953,18 @@ function GrooveWriter() {
 		var tune_title = document.getElementById("tuneTitle").value;
 
 		if (tune_title.length == 0) {
-			filename = "notation.";
+			filename = "notation";
 		} else {
 			filename = tune_title;
 		}
-		filename += imageType;
 
 		var svg_images = svg_obj.svg.split("</svg>");
+
 		// that split should always create at least 2 since it will match that </svg> if there is only one
 		// since the split creates an extra one reduce the length by 1
-		for (var i=0; i < svg_images.length-1; i++) {
+		var svg_images_length = svg_images.length - 1;
+
+		for (var i=0; i < svg_images_length; i++) {
 			var myPablo = Pablo(svg_images[i] + "</svg>");
 			var width = parseFloat(myPablo.attr('width'));
 			var height = parseFloat(myPablo.attr('height'));
@@ -2976,7 +2978,14 @@ function GrooveWriter() {
 			myPablo.attr('viewBox', '0 0 ' + newBoxWidth + ' ' + newBoxHeight);
 			myPablo.children('g').attr('transform', 'scale(2)');
 
-			myPablo.download(imageType, filename, function (result) {
+			var filenumber = "";
+			if (svg_images_length > 1) {
+				filenumber = ` ${String(i+1).padStart(2, '0')}`;
+			}
+
+			var full_filename = `${filename}${filenumber}.${imageType}`;
+
+			myPablo.download(imageType, full_filename, function (result) {
 				if (result.error) {
 					alert("An error occurred when trying to convert the sheet music to a PNG file.");
 				}
