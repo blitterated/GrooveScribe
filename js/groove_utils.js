@@ -33,7 +33,7 @@ if (document.currentScript)
 var global_midiInitialized = false;
 
 // global constants
-var constant_MAX_MEASURES = 10;
+var constant_MAX_MEASURES = 32;
 var constant_DEFAULT_TEMPO = 80;
 var constant_ABC_STICK_R = '"R"x';
 var constant_ABC_STICK_L = '"L"x';
@@ -947,6 +947,7 @@ function GrooveUtils() {
 		myGrooveData.metronomeFrequency = parseInt(root.getQueryVariableFromString("MetronomeFreq", "0", encodedURLData), 10);
 
 		myGrooveData.numberOfMeasures = parseInt(root.getQueryVariableFromString("measures", 1, encodedURLData), 10);
+
 		if (myGrooveData.numberOfMeasures < 1 || isNaN(myGrooveData.numberOfMeasures))
 			myGrooveData.numberOfMeasures = 1;
 		else if (myGrooveData.numberOfMeasures > constant_MAX_MEASURES)
