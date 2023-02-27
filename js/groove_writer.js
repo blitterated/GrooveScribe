@@ -2978,14 +2978,14 @@ function GrooveWriter() {
 			myPablo.attr('viewBox', '0 0 ' + newBoxWidth + ' ' + newBoxHeight);
 			myPablo.children('g').attr('transform', 'scale(2)');
 
-			var filenumber = "";
+			var fileNumber = "";
 			if (svg_images_length > 1) {
-				filenumber = ` ${String(i+1).padStart(2, '0')}`;
+				fileNumber = ` ${String(i+1).padStart(2, '0')}`;
 			}
 
-			var full_filename = `${filename}${filenumber}.${imageType}`;
+			var fullFilename = `${filename}${fileNumber}.${imageType}`;
 
-			myPablo.download(imageType, full_filename, function (result) {
+			myPablo.download(imageType, fullFilename, function (result) {
 				if (result.error) {
 					alert("An error occurred when trying to convert the sheet music to a PNG file.");
 				}
